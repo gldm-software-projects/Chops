@@ -10,6 +10,7 @@ A game can end even before the board is full, if a player does not have any more
 
 This is a Ruby implementation of the CHOPS game.
 
+---------------------
 ## Pieces
 
 Each player starts with eight pieces: two Birds, two Spears, a Sword, a Snake, a Tree, and a Shield.
@@ -25,7 +26,7 @@ For each square of the replica:
 	- If the attacker wins → the defender is removed and the replica is created
 	- If the attacker loses → nothing happens
 
-## Conflict
+### Conflict
 
 |Attacker → / Defender ↓ |	Spear|Sword|Snake|Tree|Shield|Bird|
 |------------------------|-----|----|-----|-----|-----|-----|
@@ -43,26 +44,31 @@ For each square of the replica:
 ## How to play
 
 You'll need a Ruby interpreter. 
-Clone the repository or download the code, move in the code directory then run the game by typing
-```
+Clone the repository or download the code, move in the code directory then run the game by typing:
+```ssh
 ruby game.rb
 ```
+
 ![Run the game](/images/ss_00.png "Run")
 
 The game welcomes you with a brief description of the pieces and a representation of the starting chessboard.
+
 ![Starting](/images/ss_01.png "Starting")
 
 You can move selecting a square in the chessboard: input row and column as integer, separated by a space.
 The games ask you to choose a move (some pieces can have multiple options). 
 Select a move by typing its number.
+
 ![Interacting with the game](/images/ss_02.png "Playing")
 
 After your move, the computer will make its move then prompt back for your next move.
 
 The game ends when there is no empty square on the board.
+
 ![End of the game](/images/ss_04.png "Endgame")
 
 ### Saving and loading
+
 The game allows you to save a game (input "S" when it's your turn) and load it back (input "L").
 
 ---------------------
@@ -70,8 +76,8 @@ The game allows you to save a game (input "S" when it's your turn) and load it b
 
 The game is in an early stage, many things are missing:
 - fine-tuning of the rules
-- a graphical user interface
 - allow a human-VS-human match
+- a graphical user interface
 
 ![Sample of a possible GUI for the game](/images/sample_board.jpg "GUI")
 
