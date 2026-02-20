@@ -44,9 +44,9 @@ For each square of the replica:
 
 You'll need a Ruby interpreter. 
 Clone the repository or download the code, move in the code directory then run the game by typing
-...
+```
 ruby game.rb
-...
+```
 ![Run the game](/images/ss_00.png "Run")
 
 The game welcomes you with a brief description of the pieces and a representation of the starting chessboard.
