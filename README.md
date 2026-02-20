@@ -72,3 +72,6 @@ The game is in an early stage, many things are missing:
 - a better algorithm for the opposing player
 - a graphical user interface
 - allow a human-VS-human match
+
+![Sample of a possible GUI for the game](/images/sample_board.jpg "GUI")
+
