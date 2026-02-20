@@ -69,6 +69,6 @@ The game allows you to save a game (input "S" when it's your turn) and load it b
 ## Developments note
 
 The game is in an early stage, many things are missing:
-- a better algorithm for the opposing player
+- fine-tuning of the rules
 - a graphical user interface
 - allow a human-VS-human match
