@@ -8,35 +8,35 @@ class Game
 
   def initialize
     @board = Board.new
-    @current_player = :white
+    @current_player = :blue
     setup_pieces
   end
 
   def setup_pieces
-    white = 7
-    black = 0
+    blue = 7
+    red = 0
 
     # Bianchi
-    row = white
-    board.place_piece(Bird.new(color: :white),   row, 0)
-    board.place_piece(Spear.new(color: :white),  row, 1)
-    board.place_piece(Sword.new(color: :white),  row, 2)
-    board.place_piece(Snake.new(color: :white),  row, 3)
-    board.place_piece(Tree.new(color: :white),   row, 4)
-    board.place_piece(Shield.new(color: :white), row, 5)
-    board.place_piece(Spear.new(color: :white),  row, 6)
-    board.place_piece(Bird.new(color: :white),   row, 7)
+    row = blue
+    board.place_piece(Bird.new(color: :blue),   row, 0)
+    board.place_piece(Spear.new(color: :blue),  row, 1)
+    board.place_piece(Sword.new(color: :blue),  row, 2)
+    board.place_piece(Snake.new(color: :blue),  row, 3)
+    board.place_piece(Tree.new(color: :blue),   row, 4)
+    board.place_piece(Shield.new(color: :blue), row, 5)
+    board.place_piece(Spear.new(color: :blue),  row, 6)
+    board.place_piece(Bird.new(color: :blue),   row, 7)
 
     # Neri (specchio)
-    row = black
-    board.place_piece(Bird.new(color: :black),   row, 0)
-    board.place_piece(Spear.new(color: :black),  row, 1)
-    board.place_piece(Shield.new(color: :black), row, 2)
-    board.place_piece(Tree.new(color: :black),   row, 3)
-    board.place_piece(Snake.new(color: :black),  row, 4)
-    board.place_piece(Sword.new(color: :black),  row, 5)
-    board.place_piece(Spear.new(color: :black),  row, 6)
-    board.place_piece(Bird.new(color: :black),   row, 7)
+    row = red
+    board.place_piece(Bird.new(color: :red),   row, 0)
+    board.place_piece(Spear.new(color: :red),  row, 1)
+    board.place_piece(Shield.new(color: :red), row, 2)
+    board.place_piece(Tree.new(color: :red),   row, 3)
+    board.place_piece(Snake.new(color: :red),  row, 4)
+    board.place_piece(Sword.new(color: :red),  row, 5)
+    board.place_piece(Spear.new(color: :red),  row, 6)
+    board.place_piece(Bird.new(color: :red),   row, 7)
   end
 
   def game_over?
@@ -44,16 +44,16 @@ class Game
   end
 
   def winner
-    white = board.grid.flatten.count { |p| p&.color == :white }
-    black = board.grid.flatten.count { |p| p&.color == :black }
+    blue = board.grid.flatten.count { |p| p&.color == :blue }
+    red = board.grid.flatten.count { |p| p&.color == :red }
 
-    return :white if white > black
-    return :black if black > white
+    return :blue if blue > red
+    return :red if red > blue
     :draw
   end
 
   def switch_player
-    @current_player = (@current_player == :white ? :black : :white)
+    @current_player = (@current_player == :blue ? :red : :blue)
   end
 
   def all_moves_for(color)
@@ -74,21 +74,62 @@ class Game
     moves
   end
 
-  def bot_move
-    moves = all_moves_for(:black)
-    return if moves.empty?
+def evaluate_move(move)
+  piece = move[:piece]
+  rep   = move[:replication]
 
-    best_score = moves.map { |m| m[:replication].size }.max
-    best_moves = moves.select { |m| m[:replication].size == best_score }
+  score = rep.size  # main criteria: more clones
 
-    chosen = best_moves.sample
+  rep.each do |r, c|
+    occ = board.piece_at(r, c)
+    next if occ.nil?
+    next if occ.color == piece.color
 
-    piece = chosen[:piece]
-    rep   = chosen[:replication]
-
-    puts "\nComputer moves #{piece.class.name} from #{chosen[:from].inspect}"
-    board.apply_replication(piece, rep)
+    # if can beat an enemy: bonus
+    score += 2 if piece.defeats.include?(occ.class)
   end
+
+  score
+end
+
+def bot_move
+  moves = all_moves_for(:red)
+  return if moves.empty?
+
+  scored = moves.map do |m|
+    [m, evaluate_move(m)]
+  end
+
+  best_score = scored.map(&:last).max
+  best_moves = scored.select { |_, s| s == best_score }.map(&:first)
+
+  chosen = best_moves.sample
+
+  piece = chosen[:piece]
+  rep   = chosen[:replication]
+
+  puts "\nIl bot muove #{piece.class.name} da #{chosen[:from].inspect}"
+  puts "Replica in: #{rep.map { |r,c| "(#{r},#{c})" }.join(" ")}"
+
+  board.apply_replication(piece, rep)
+end
+
+
+#def bot_move
+  #  moves = all_moves_for(:red)
+  #  return if moves.empty?
+
+  #  best_score = moves.map { |m| m[:replication].size }.max
+  #  best_moves = moves.select { |m| m[:replication].size == best_score }
+
+  #  chosen = best_moves.sample
+
+  #  piece = chosen[:piece]
+  #  rep   = chosen[:replication]
+
+  #  puts "\nComputer moves #{piece.class.name} from #{chosen[:from].inspect}"
+  #  board.apply_replication(piece, rep)
+ # end
 
   def ask_piece_selection
     loop do
@@ -216,7 +257,7 @@ class Game
       board.display
       puts "\nTurn: #{@current_player}"
 
-      if @current_player == :white
+      if @current_player == :blue
         human_turn
       else
         bot_move

@@ -6,7 +6,7 @@ class Piece
   end
 
   def direction 
-    @color == :white ? -1 : 1
+    @color == :blue ? -1 : 1
   end
 
   def symbol
