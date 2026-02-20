@@ -1,14 +1,16 @@
 # R-CHOPS 
 
-![Representation of the six chops pieces](/images/chops.jpg "Chops pieces")
+<img src="/images/chops.jpg" alt="Representation of the six chops pieces" width="640"/>
 
 ## a simple board game between Chess and the Conway's game LIFE.
 
 The game is based on an 8x8 board similar to chess, every player can make a move during his turn.
-The game is over when there is no empty square on the chessboard, and wins the player with more pieces on the board.
-A game can end even before the board is full, if a player does not have any more piece left.
 
-This is a Ruby implementation of the CHOPS game.
+The game is over when there is no empty square on the chessboard, and wins the player with more pieces on the board.
+
+A game can end even before the board is full if a player does not have any more pieces left.
+
+*This is a Ruby implementation of the CHOPS game.*
 
 ---------------------
 ## Pieces
@@ -80,5 +82,5 @@ The game is in an early stage, many things are missing:
 - allow a human-VS-human match
 - a graphical user interface
 
-![Sample of a possible GUI for the game](/images/sample_board.jpg "GUI")
+<img src="/images/sample_board.jpg" alt="Sample of a possible GUI for the game" width="400"/>
 
