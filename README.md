@@ -36,8 +36,8 @@ For each square of the replica:
 |Shield	|❌	|❌	|❌	|✔️	|✔️	|❌|
 |Bird	|✔️	|✔️	|✔️	|✔️	|✔️	|✔️|
 
-✔️ = l’attaccante vince
-❌ = l’attaccante perde
+✔️ = the attacker wins
+❌ = the attacker loses
 
 ---------------------
 ## How to play
