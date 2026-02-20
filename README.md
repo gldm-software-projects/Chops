@@ -13,7 +13,7 @@ A game can end even before the board is full if a player does not have any more 
 *This is a Ruby implementation of the CHOPS game.*
 
 ---------------------
-## Pieces
+## Rules
 
 Each player starts with eight pieces: two Birds, two Spears, a Sword, a Snake, a Tree, and a Shield.
 
