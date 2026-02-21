@@ -18,6 +18,7 @@ A game can end even before the board is full if a player does not have any more 
 Each player starts with eight pieces: two Birds, two Spears, a Sword, a Snake, a Tree, and a Shield.
 
 The pieces do not move on the board but replicate. Each piece has its own replication mode.
+
 In the following figure we see the replication rules for every piece, let's assume the piece is oriented from the top of the screen towards the bottom of it.
 
 ![Rules for replication of the pieces](/images/rules_00.png "Replication rules")
@@ -29,7 +30,7 @@ For each square of the replica:
 	- If the attacker wins → the defender is removed and the replica is created
 	- If the attacker loses → nothing happens
 
-### Conflict
+### Conflict rules
 
 |Attacker → / Defender ↓ |	Spear|Sword|Snake|Tree|Shield|Bird|
 |------------------------|-----|----|-----|-----|-----|-----|
