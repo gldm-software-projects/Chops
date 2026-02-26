@@ -70,13 +70,17 @@ class Board
     "\e[#{color_code}m#{text}\e[0m"
   end
   def red(text); colorize(text, 31); end
-  def blue(text); colorize(text, 34); end
+  def blue(text); colorize(text, 34); end 
+  def yellow(text); colorize(text, 33); end
 
   def display
-    puts "\n   0 1 2 3 4 5 6 7"
+    print "\n   "
+     print yellow("0 1 2 3 4 5 6 7")
+    puts
     puts "  _________________"
     grid.each_with_index do |row, r|
-      print "#{r} |"
+      print yellow("#{r}")
+      print " |"
       row.each do |p|        
         print(p ? (p.direction==1 ? red(p.symbol): blue(p.symbol)) : ".")
         print " "

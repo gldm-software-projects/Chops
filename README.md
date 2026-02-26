@@ -34,12 +34,12 @@ For each square of the replica:
 
 |Attacker → / Defender ↓ |	Spear|Sword|Snake|Tree|Shield|Bird|
 |------------------------|-----|----|-----|-----|-----|-----|
-|Spear	|✔️	|✔️	|❌	|❌	|❌	|✔️|
-|Sword	|✔️	|✔️	|✔️	|✔️	|❌	|✔️|
-|Snake	|✔️	|✔️	|✔️	|❌	|❌	|✔️|
-|Tree	|✔️	|❌	|✔️	|✔️	|❌	|❌|
-|Shield	|❌	|❌	|❌	|✔️	|✔️	|❌|
-|Bird	|✔️	|✔️	|✔️	|✔️	|✔️	|✔️|
+|Spear	|❌ |✔️ |❌ |❌ |❌ |✔️ |
+|Sword	|✔️	|❌ |✔️ |✔️ |✔️ |✔️ |
+|Snake	|✔️	|✔️	|✔️	|❌ |❌ |✔️ |
+|Tree	|✔️	|❌ |✔️ |❌ |❌ |❌ |
+|Shield	|❌ |❌ |❌ |✔️ |❌ |❌ |
+|Bird	|✔️	|✔️	|✔️	|✔️	|✔️	|✔️	|
 
 ✔️ = the attacker wins
 ❌ = the attacker loses
@@ -48,12 +48,16 @@ For each square of the replica:
 ## How to play
 
 You'll need a Ruby interpreter. 
-Clone the repository or download the code, move in the code directory then run the game by typing:
+Clone the repository or download the code, move in the code directory then run the game against the computer by typing:
 ```ssh
-ruby game.rb
+ruby onePlayerGame.rb
 ```
 
-![Run the game](/images/ss_00.png "Run")
+If you want to make the computer play against itself, type:
+
+```ssh
+ruby zeroPlayersGame.rb
+```
 
 The game welcomes you with a brief description of the pieces and a representation of the starting chessboard.
 

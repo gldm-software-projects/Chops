@@ -4,7 +4,7 @@ class Tree < Piece
   end
 
   def defeats
-    [Spear, Snake, Tree]
+    [Spear, Snake]
   end
 
   def replication_moves(board)

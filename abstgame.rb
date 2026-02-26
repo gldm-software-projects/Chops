@@ -93,7 +93,7 @@ def evaluate_move(move)
 end
 
 def bot_move(side)
-  moves = all_moves_for(:red) #all_moves_for(:red)
+  moves = all_moves_for(side) #all_moves_for(:red)
   return if moves.empty?
 
   scored = moves.map do |m|
@@ -108,83 +108,31 @@ def bot_move(side)
   piece = chosen[:piece]
   rep   = chosen[:replication]
 
-  puts "\nIl bot muove #{piece.class.name} da #{chosen[:from].inspect}"
-  puts "Replica in: #{rep.map { |r,c| "(#{r},#{c})" }.join(" ")}"
+  puts "\nThe #{@current_player} bot clones #{piece.class.name} from #{chosen[:from].inspect}"
+  puts "Try to replicate in: #{rep.map { |r,c| "(#{r},#{c})" }.join(" ")}"
 
   board.apply_replication(piece, rep)
 end
 
+###################################################################################
+# file save / load functions
 
-#def bot_move
-  #  moves = all_moves_for(:red)
-  #  return if moves.empty?
+  def load_game(filename = "current_game.json")
+    data = JSON.parse(File.read(filename), symbolize_names: true)
 
-  #  best_score = moves.map { |m| m[:replication].size }.max
-  #  best_moves = moves.select { |m| m[:replication].size == best_score }
+    @board = Board.new
+    @current_player = data[:current_player].to_sym
 
-  #  chosen = best_moves.sample
-
-  #  piece = chosen[:piece]
-  #  rep   = chosen[:replication]
-
-  #  puts "\nComputer moves #{piece.class.name} from #{chosen[:from].inspect}"
-  #  board.apply_replication(piece, rep)
- # end
-
-  def ask_piece_selection
-    loop do
-      print "Select a cell (r c) - S to save the current game, L to load the saved game: "
-      input = gets.chomp
-      if (input=='L')||(input=='l')
-        #LOAD GAME
-        load_game()
-        board.display
-      elsif (input=='S')||(input=='s')
-        #SAVE GAME
-        save_game()
-      else
-        r, c = input.split.map(&:to_i)
-
-        piece = board.piece_at(r, c)
-
-        next puts "Empty cell." if piece.nil?
-        next puts "It is not a piece of yours." if piece.color != current_player
-
-        return piece
-      end
+    data[:pieces].each do |p|
+      klass = Object.const_get(p[:type])
+      piece = klass.new(color: p[:color].to_sym)
+      board.place_piece(piece, p[:row], p[:col])
     end
+
+    puts "Game loaded."
   end
 
-  def ask_replication_choice(options)
-    puts "Optional moves:"
-    options.each_with_index do |m, i|
-      coords = m.map { |r,c| "(#{r},#{c})" }.join(" ")
-      puts "#{i}: #{coords}"
-    end
-
-    loop do
-      print "Please select one: "
-      i = gets.chomp.to_i
-      # puts "hai scelto #{options[i]}"
-      return options[i] if i.between?(0, options.size - 1)
-      puts "Selection invalid."
-    end
-  end
-
-  def human_turn
-    piece = ask_piece_selection
-    options = piece.replication_moves(board)
-
-    if options.empty?
-      puts "This piece cannot move."#puts "Questo pezzo non può replicarsi."
-      return
-    end
-
-    rep = ask_replication_choice(options)
-    # puts "sto passando questi parametri: #{piece}  #{rep}"
-    board.apply_replication(piece, rep)
-  end
-
+  
   def save_game(filename = "current_game.json")
     data = {
       current_player: @current_player,
@@ -207,21 +155,7 @@ end
     puts "Game saved."
   end
 
-  def load_game(filename = "current_game.json")
-    data = JSON.parse(File.read(filename), symbolize_names: true)
-
-    @board = Board.new
-    @current_player = data[:current_player].to_sym
-
-    data[:pieces].each do |p|
-      klass = Object.const_get(p[:type])
-      piece = klass.new(color: p[:color].to_sym)
-      board.place_piece(piece, p[:row], p[:col])
-    end
-
-    puts "Game loaded."
-  end
-
+###################################################################################
   # functions to color the console output
   def colorize(text, color_code)
     "\e[#{color_code}m#{text}\e[0m"
@@ -232,7 +166,8 @@ end
   def green(text); colorize(text, 32); end
   def yellow(text); colorize(text, 33); end
   def blue(text); colorize(text, 34); end
-
+  
+###################################################################################
   def game_loop
     system("cls")
     # descrizione pezzi
@@ -252,20 +187,21 @@ end
     puts "6 = Bird"
     print green("____________________________________________________________")
     puts
-    until game_over?
-      #system("clear")
-      board.display
-      puts "\nTurn: #{@current_player}"
 
-      if @current_player == :blue
-        human_turn
-      else
-        bot_move(:red)
-        sleep 1
-      end
+    # until game_over?
+    #   #system("clear")
+    #   board.display
+    #   puts "\nTurn: #{@current_player}"
 
-      switch_player
-    end
+    #   if @current_player == :blue
+    #      human_turn
+    #   else
+    #     bot_move(:red)
+    #     sleep 1
+    #   end
+
+    #   switch_player
+    # end
 
     board.display
     puts "\nGame over!"

@@ -4,7 +4,7 @@ class Shield < Piece
   end
 
   def defeats
-    [Tree, Shield]
+    [Tree]
   end
 
   def replication_moves(board)

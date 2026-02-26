@@ -4,7 +4,7 @@ class Sword < Piece
   end
 
   def defeats
-    [Spear, Sword, Snake, Tree, Bird]
+    [Spear, Snake, Tree, Shield, Bird]
   end
 
   def replication_moves(board)
