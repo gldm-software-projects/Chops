@@ -48,6 +48,7 @@ For each square of the replica:
 ## How to play
 
 You'll need a Ruby interpreter. 
+
 Clone the repository or download the code, move in the code directory then run the game against the computer by typing:
 ```ssh
 ruby onePlayerGame.rb
