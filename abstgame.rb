@@ -78,15 +78,24 @@ def evaluate_move(move)
   piece = move[:piece]
   rep   = move[:replication]
 
-  score = rep.size  # main criteria: more clones
+  #score = rep.size  # main criteria: more clones
+  score = 0 # initialize score
 
   rep.each do |r, c|
     occ = board.piece_at(r, c)
-    next if occ.nil?
-    next if occ.color == piece.color
 
-    # if can beat an enemy: bonus
-    score += 2 if piece.defeats.include?(occ.class)
+    # every blank space occupied by the current move is one point of score
+    score += 1 if occ.nil?
+    next if occ.nil? #next if is null
+    next if occ.color == piece.color #next if it is an ally piece
+
+    # alternative
+    #next if (occ != nil)&&(occ.color == piece.color)   
+
+    # if can beat an enemy: add 0.9 to score
+    score += 0.4 if piece.defeats.include?(occ.class)
+    # alternative
+    #score += 0.4 if (occ != nil)&&(piece.defeats.include?(occ.class))
   end
 
   score
@@ -95,6 +104,9 @@ end
 def bot_move(side)
   moves = all_moves_for(side) #all_moves_for(:red)
   return if moves.empty?
+
+  # aggiunta
+  # moves.sort_by{ |move| move[:replication].size }
 
   scored = moves.map do |m|
     [m, evaluate_move(m)]
