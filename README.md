@@ -53,7 +53,7 @@ Clone the repository or download the code, move in the code directory then run t
 ruby onePlayerGame.rb
 ```
 
-If you want to make the computer play against a friend, type:
+If you want to play against a friend, type:
 
 ```ssh
 ruby twoPlayersGame.rb
@@ -65,7 +65,7 @@ If you want to make the computer play against itself, type:
 ruby zeroPlayersGame.rb
 ```
 
-### One player against the compyter
+### One player against the computer
 
 The game welcomes you with a brief description of the pieces and a representation of the starting chessboard.
 
