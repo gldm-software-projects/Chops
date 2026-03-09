@@ -1,6 +1,6 @@
 require_relative "humanGame"
 
-# a game with one player against another
+# a console game with one player against another
 class TwoPlayersGame<HumanGame
 
   def game_loop
@@ -24,7 +24,7 @@ class TwoPlayersGame<HumanGame
     puts
     until game_over?
       #system("clear")
-      board.display
+      board.consoleDisplay
       puts "\nTurn: #{@current_player}"
 
       if @current_player == :blue
@@ -37,7 +37,7 @@ class TwoPlayersGame<HumanGame
       switch_player
     end
 
-    board.display
+    board.consoleDisplay
     puts "\nGame over!"
     puts "Winner: #{winner}"
   end

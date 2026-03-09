@@ -1,7 +1,6 @@
-
 require_relative "abstgame"
 
-# a game computer vs computer
+# a console game computer vs computer
 class ZeroPlayersGame<AbstGame
 
   def game_loop
@@ -25,7 +24,7 @@ class ZeroPlayersGame<AbstGame
     puts
     until game_over?
       #system("clear")
-      board.display
+      board.consoleDisplay
       print "\nTurn: #{@current_player}"
 
       if @current_player == :blue
@@ -39,7 +38,7 @@ class ZeroPlayersGame<AbstGame
       switch_player
     end
         
-    board.display
+    board.consoleDisplay
     puts "\nGame over!"
     puts "Winner: #{winner}"
   end

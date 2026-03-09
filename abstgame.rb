@@ -92,8 +92,9 @@ def evaluate_move(move)
     # alternative
     #next if (occ != nil)&&(occ.color == piece.color)   
 
-    # if can beat an enemy: add 0.9 to score
-    score += 0.4 if piece.defeats.include?(occ.class)
+    # if can beat an enemy: add 0.99 - 0.2 to the score of the move
+    # the value of this score impacts greatly the behaviour of the bot
+    score += 0.3 if piece.defeats.include?(occ.class)
     # alternative
     #score += 0.4 if (occ != nil)&&(piece.defeats.include?(occ.class))
   end
@@ -182,43 +183,6 @@ end
 ###################################################################################
   def game_loop
     system("cls")
-    # descrizione pezzi
-    print red("R")
-    print "-"
-    print yellow("CHOPS")
-    print blink("  https://github.com/gldm-software-projects/Chops")
-    puts
-    puts
-    print green("Pieces description")
-    puts
-    puts "1 = Spear"
-    puts "2 = Sword"    
-    puts "3 = Snake"
-    puts "4 = Tree"
-    puts "5 = Shield"
-    puts "6 = Bird"
-    print green("____________________________________________________________")
-    puts
 
-    # until game_over?
-    #   #system("clear")
-    #   board.display
-    #   puts "\nTurn: #{@current_player}"
-
-    #   if @current_player == :blue
-    #      human_turn
-    #   else
-    #     bot_move(:red)
-    #     sleep 1
-    #   end
-
-    #   switch_player
-    # end
-
-    board.display
-    puts "\nGame over!"
-    puts "Winner: #{winner}"
   end
 end
-
-#Game.new.game_loop

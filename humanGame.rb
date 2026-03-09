@@ -1,7 +1,6 @@
-
 require_relative "abstgame"
 
-# a game with human interaction
+# a console game with human interaction
 class HumanGame<AbstGame
   
   def ask_piece_selection
@@ -11,7 +10,7 @@ class HumanGame<AbstGame
       if (input=='L')||(input=='l')
         #LOAD GAME
         load_game()
-        board.display
+        board.consoleDisplay
       elsif (input=='S')||(input=='s')
         #SAVE GAME
         save_game()
@@ -38,7 +37,7 @@ class HumanGame<AbstGame
     loop do
       print "Please select one: "
       i = gets.chomp.to_i
-      # puts "hai scelto #{options[i]}"
+      # puts "hai scelto #{options[i]}" #debug
       return options[i] if i.between?(0, options.size - 1)
       puts "Selection invalid."
     end
@@ -49,15 +48,13 @@ class HumanGame<AbstGame
     options = piece.replication_moves(board)
 
     if options.empty?
-      puts "This piece cannot move."#puts "Questo pezzo non può replicarsi."
+      puts "This piece cannot move."
       return
     end
 
     rep = ask_replication_choice(options)
-    # puts "sto passando questi parametri: #{piece}  #{rep}"
+    # puts "sto passando questi parametri: #{piece}  #{rep}" #debug
     board.apply_replication(piece, rep)
   end
  
 end
-
-#Game.new.game_loop

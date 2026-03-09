@@ -73,7 +73,8 @@ class Board
   def blue(text); colorize(text, 34); end 
   def yellow(text); colorize(text, 33); end
 
-  def display
+  # display the game board on console
+  def consoleDisplay
     print "\n   "
      print yellow("0 1 2 3 4 5 6 7")
     puts
