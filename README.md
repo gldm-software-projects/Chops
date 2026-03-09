@@ -53,11 +53,19 @@ Clone the repository or download the code, move in the code directory then run t
 ruby onePlayerGame.rb
 ```
 
+If you want to make the computer play against a friend, type:
+
+```ssh
+ruby twoPlayersGame.rb
+```
+
 If you want to make the computer play against itself, type:
 
 ```ssh
 ruby zeroPlayersGame.rb
 ```
+
+### One player against the compyter
 
 The game welcomes you with a brief description of the pieces and a representation of the starting chessboard.
 
@@ -83,8 +91,7 @@ The game allows you to save a game (input "S" when it's your turn) and load it b
 ## Developments note
 
 The game is in an early stage, many things are missing:
-- fine-tuning of the rules
-- allow a human-VS-human match
+- fine-tuning of the rules and the initial position (and the number) of the pieces
 - a graphical user interface
 
 <img src="/images/sample_board.jpg" alt="Sample of a possible GUI for the game" width="400"/>
