@@ -65,6 +65,7 @@ If you want to make the computer play against itself, type:
 ```ssh
 ruby zeroPlayersGame.rb
 ```
+[![Watch the game CPU vs CPU](https://img.youtube.com/vi/gnK6br-4m7I/hqdefault.jpg)](https://youtu.be/gnK6br-4m7I)
 
 ### One player against the computer
 
