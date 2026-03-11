@@ -1,4 +1,4 @@
-# R-CHOPS 
+# R-Chops
 
 <img src="/images/chops.jpg" alt="Representation of the six chops pieces" width="640"/>
 
